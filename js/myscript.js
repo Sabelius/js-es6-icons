@@ -102,18 +102,41 @@ const colors = ["blue", "orange", "purple"];
 let container = document.getElementById("icons-container");
 console.log(container);
 
+const coloredIcons = itemsColor(iconsList, colors);
+console.log(coloredIcons);
+InPage(coloredIcons, container);
+
+
+const types = propertyValues(iconsList, "type");
+const select = document.getElementById("select");
+selectOptions(types, select);
+select.addEventListener("change", () => {
+    const selectedValue = select.value;
+
+    const filteredIcons = selectedChoices(iconsList, selectedValue);
+    InPage(filteredIcons, container);
+})
+
+
+
+
+
+
 function InPage(array, container) {
+    let temporaryHTML = "";
+
     array.forEach(element => {
         const { family, name, prefix, type, color } = element;
-        container.innerHTML +=
-        `<div class = "col-3 pt-3">
-        <i class = "${family} ${prefix}${name}" style ="color: ${color}"></i>
-        <h4 class = "icon-title">${name} (${type})</h4>
+        temporaryHTML +=
+        `<div class = "col-2 pt-3 text-center">
+        <div class = "items-container">
+        <i class = "${family} ${prefix}${name} icons pt-2" style ="color: ${color}"></i>
+        <h4 class = "icon-title text-uppercase">${name}</h4>
+        </div>
         </div>`;
     });
+    container.innerHTML = temporaryHTML;
 }
-
-InPage(iconsList, container);
 
 function propertyValues(array, property){
     const types = [];
@@ -125,8 +148,6 @@ function propertyValues(array, property){
     return types;
 }
 
-
-
 function itemsColor(array, colors){
     const types = propertyValues(array, "type");
 
@@ -136,9 +157,20 @@ function itemsColor(array, colors){
             element.color = colors[indexOfType];
         }
         return element;
-    })
+    });
     return colorArray;
 }
 
-InPage(iconsList, itemsColor(iconsList, colors));
+function selectOptions(options, select){
+    options.forEach((element) =>{
+        select.innerHTML += `<option value = "${element}">${element} </option>`;
+    });
+    console.log (select);
+}
 
+function selectedChoices(array, filter){
+    if(filter.trim().toLowerCase() === "all"){
+        return array;
+    }
+    return array.filter((element) => element.type == filter);
+}
