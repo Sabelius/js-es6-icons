@@ -1,5 +1,6 @@
 .header-title{
     color: aqua;
+    height: 40px;
 }
 .select-section{
     background-color: rgb(29, 179, 230);
@@ -7,7 +8,7 @@
 }
 .container-color{
     background-color: rgb(212, 209, 209);
-    height: 550px;
+    height: calc(100vh - 98px);
 }
 .icons{
     font-size: 30px;
@@ -21,3 +22,4 @@
     border-radius: 10px;
     background-color: white;
     box-shadow: 5px 10px 8px #888888;
+}

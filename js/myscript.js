@@ -128,9 +128,9 @@ function InPage(array, container) {
     array.forEach(element => {
         const { family, name, prefix, type, color } = element;
         temporaryHTML +=
-        `<div class = "col-2 pt-3 text-center">
+        `<div class = "col-lg-2 col-md-3 col-sm-6 pt-5 text-center">
         <div class = "items-container">
-        <i class = "${family} ${prefix}${name} icons pt-2" style ="color: ${color}"></i>
+        <i class = "${family} ${prefix}${name} icons pt-3" style ="color: ${color}"></i>
         <h4 class = "icon-title text-uppercase">${name}</h4>
         </div>
         </div>`;
@@ -149,7 +149,7 @@ function propertyValues(array, property){
 }
 
 function itemsColor(array, colors){
-    const types = propertyValues(array, "type");
+    const types = propertyValues(array, "type"); 
 
     const colorArray = array.map((element) => {
         const indexOfType = types.indexOf(element.type);
@@ -168,9 +168,9 @@ function selectOptions(options, select){
     console.log (select);
 }
 
-function selectedChoices(array, filter){
-    if(filter.trim().toLowerCase() === "all"){
+function selectedChoices(array, choice){
+    if(choice === "all"){
         return array;
     }
-    return array.filter((element) => element.type == filter);
+    return array.filter((element) => element.type == choice);
 }
